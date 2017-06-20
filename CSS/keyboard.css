@@ -1,0 +1,91 @@
+@charset "UTF-8";
+html,
+body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+.keyboard-icon{
+  background: url("../img/keyboard.png") no-repeat;
+  width: 26px;
+  height: 18px;
+  background-size: 100% 100%;
+  cursor: pointer;
+}
+.keyboard-container {
+  position: fixed;
+  bottom: 0;
+  height: 232px;
+  width: 1024px;
+  left: 50%;
+  right: 50%;
+  margin-left: -512px;
+  margin-right: -512px;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+}
+.keyboard-container .keyboard-table {
+  width: 100%;
+  height: 100%;
+}
+.keyboard-container .keyboard-table .keyboard-div {
+  margin-top: 16px;
+  display: flex;
+  clear: both;
+}
+.keyboard-container .keyboard-table .keyboard-div p {
+  margin: 0 8px 0 0;
+  padding: 0;
+  background: #FFFFFF;
+  color: #404040;
+  width: 64px;
+  height: 56px;
+  line-height: 56px;
+  text-align: center;
+  font-size: 35px;
+  font-weight: bold;
+  flex: 1;
+  font-family: "microsoft yahei";
+  border-radius: 2px;
+  cursor: pointer;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: pointer;
+}
+.keyboard-container .keyboard-table .keyboard-div p:active {
+  background: #eeeeee;
+}
+.keyboard-container .keyboard-table .keyboard-div p.delete {
+  font-size: 16px;
+  background: #FB6001;
+  color: #FFFFFF;
+  background: url("../img/delete.png") no-repeat;
+}
+.keyboard-container .keyboard-table .keyboard-div p.delete:active{
+  background: url("../img/delete_hover.png") no-repeat;
+}
+.keyboard-container .keyboard-table .keyboard-div p.keyboard-caps {
+  background: #1A9EFE;
+  color: #FFFFFF;
+  font-size: 22px;
+}
+.keyboard-container .keyboard-table .keyboard-div p.keyboard-close {
+  background: #1A9EFE;
+  color: #FFFFFF;
+  background: url("../img/close.png") no-repeat;
+}
+.keyboard-container .keyboard-table .keyboard-div p.keyboard-close:active{
+  background: url("../img/close_hover.png") no-repeat;
+}
+.keyboard-container .keyboard-table .keyboard-div p.keyboard-sure {
+  background: #1A9EFE;
+  color: #FFFFFF;
+  flex: 2.1;
+  font-size: 22px;
+}
+.keyboard-container .keyboard-table .keyboard-div p:first-child {
+  margin-left: 8px;
+}

@@ -1,0 +1,86 @@
+﻿/*html, body {
+    height: 100%;
+    margin:0px;
+    padding:0px;
+}*/
+html, body {
+    height: 100%;
+}
+
+html {
+    font-family: sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%
+}
+
+body {
+    margin: 0
+}
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+:after, :before {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box
+}
+
+.box {
+    background: url("../Images/loginbg_mobile.png") no-repeat bottom center;
+    background-size:contain;
+    margin: 0 auto;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.logo {
+    padding-top: 30px;
+    height: 80px;
+    width: 70%;
+    margin: 0 auto;
+    background: url(../Images/logo_mobile.png) no-repeat bottom center;
+    background-size: contain;
+}
+
+.am-list {
+    padding-top: 30px;
+    width: 70%;
+    margin: 0 auto;
+}
+
+.am-list-item {
+    position: relative;
+    width: 100%;
+    border-bottom: 1px solid #CACACA
+}
+
+.am-input-required {
+    border: 0;
+}
+    
+.am-fieldBottom {
+    margin-top: 20px;
+}
+
+.am-button-submit {
+    background: -webkit-linear-gradient(left,#ff9000,#ff5000) no-repeat;
+    color: #fff;
+    box-shadow: 0px 2px 3px #f7c7b1;
+}
+
+.am-button {
+    font-size: 1.0rem;
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    -webkit-border-radius: 2px;
+    -moz-border-radius: 2px;
+    border-radius: 2px;
+    border: 0;
+}

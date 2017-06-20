@@ -1,0 +1,239 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="wap-font-scale" content="no">
+  <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="format-detection" content="telephone=no, email=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+ <link rel="stylesheet" href="css/index.css">
+ <title>旺客来</title>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/jquery.mobile-1.4.5.min.js"></script>
+  <script src="../JS/json.js?v2.1.6" type="text/javascript"></script>
+  <script src="../JS/soft.js?v2.1.6" type="text/javascript"></script>
+  <script type="text/javascript">constPath = "../";</script>
+  <script src="../JS/posinfo.js?v2.1.6" type="text/javascript"></script>
+  <script src="../JS/select.js?v2.1.6" type="text/javascript"></script>
+  <script>
+    var areaCateList = null;
+    var areaList = null;
+    $(function () {
+      doInitAreaCate();
+      doInitArea();
+    });
+    function doInitAreaCate() {
+      areaCateList = AreaCateGet(configCompany, configStore);
+      var html = '';
+      html += '<li class="title click  titlehome">所有</li>';
+      for (var i = 0; i < areaCateList.length; i++) {
+        html += '<li class="title titlehome" data-areacate_id="' + areaCateList[i].areacate_id + '" onclick="doChooseAreaCate(\'' + areaCateList[i].areacate_id + '\');">' + areaCateList[i].areacate_name + '</li>';
+      }
+      $('#areaCateListDiv').empty().append(html);
+    }
+    function doInitArea() {
+      areaList = AreaGet(configCompany, configStore, '');
+
+      var html = '';
+      for (var i = 0; i < areaList.length; i++) {
+        var area_statuClass = "";
+        var area_seatsure = areaList[i].area_seatsure;
+        var area_opendate = "";
+        if (areaList[i].area_opendate != null && areaList[i].area_statu > 1) {
+          area_opendate = formatJsonDate(areaList[i].area_opendate, 'yyyy-MM-dd HH:mm:ss');
+        }
+        var area_readydate = "";
+        if (areaList[i].area_readydate != null && areaList[i].area_statu == 8) {
+          area_readydate = formatJsonDate(areaList[i].area_readydate, 'yyyy-MM-dd HH:mm:ss');
+        }
+        var reserved = "display:none;";
+        switch (areaList[i].area_statu) {
+          case 0: area_statuClass = "hall_cang"; area_seatsure = areaList[i].area_seat; break;
+          case 1: area_statuClass = "hall_cang"; reserved = ""; break;
+          case 2:
+          case 3: area_statuClass = "hall_cang"; break;
+          case 4: area_statuClass = "hall_cang"; break;
+          case 7: area_statuClass = "hall_cang"; break;
+          case 8: area_statuClass = "hall_cang"; break;
+          case 9: area_statuClass = "hall_cang"; break;
+          default: area_statuClass = ""; break;
+        }
+        html += '<li class="' + area_statuClass + '" data-area_cate="' + areaList[i].area_cate + '" data-areacate_name="' + areaList[i].areacate_name + '" data-area_id="' + areaList[i].area_id + '" data-area_name="' + areaList[i].area_name + '" data-area_seat="' + areaList[i].area_seat + '" data-area_seatsure="' + areaList[i].area_seatsure + '" data-area_statu="' + areaList[i].area_statu + '" data-area_lock="' + areaList[i].area_lock + '" data-area_opendate="' + area_opendate + '" data-area_readydate="' + area_readydate + '" data-area_member="' + areaList[i].area_member + '" data-area_person="' + areaList[i].area_person + '" data-area_orderid="' + areaList[i].area_orderid + '" onclick="doChooseArea(\'' + areaList[i].area_id + '\', false, false);" ondblclick="doDblclickArea();">';
+        html += '<h4>' + areaList[i].area_name + '</h4>';
+        html += '<i></i>';
+        html += '<h5></h5>';
+        html += '<p><b></b><span>' + area_seatsure + '人</span> </p>';
+        html += '</li>';
+      }
+      // 顶部点击切换
+      $('.titlebox .title').on('click',function () {
+        var index=$(".titlebox .title").index(this);
+        $(".titlebox .title").removeClass("click").eq(index).addClass("click");
+
+        $('sdf').attr('data-area_cate')
+//      获取父亲ID
+        $(".main .menu").removeClass("xianshi").eq(index).addClass("xianshi");
+      });
+
+
+      $('#areaListDiv').empty().append(html);
+
+      //chgSeatTime();
+    }
+  </script>
+</head>
+<body>
+<div data-role="page" id="pageone">
+  <!--content开始-->
+  <section class="sectionBody">
+    <div class="banner">
+      <div class="main">
+        <ul class="titleboxone">
+          <li class="titletop ">开台</li>
+          <li class="titletop ">点菜</li>
+          <li class="titletop ">打单</li>
+          <li class="titletop ">结账</li>
+          <li class="titletop titleblue ">翻台</li>
+          <li class="titletop titleblue">转台</li>
+          <li class="titletop titleblue">并桌</li>
+          <li class="titletop titleblue">转菜</li>
+        </ul>
+        <ul class="titlebox" id="areaCateListDiv">
+          <li class="title click ">所有</li>
+          <li class="title">大厅</li>
+          <li class="title ">包厢</li>
+        </ul>
+        <div class="menu xianshi">
+          <ul class="hall" id="areaListDiv">
+            <li class="hall_cang">
+                <h4>BX001</h4>
+                <i></i>
+                <h5></h5>
+                <p><b>time</b><span>12人</span> </p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li><li class="hall_cang">
+            <h4>BX001</h4>
+            <i></i>
+            <h5></h5>
+            <p><span>12</span> 人</p>
+          </li><li class="hall_cang">
+            <h4>BX001</h4>
+            <i></i>
+            <h5></h5>
+            <p><span>12</span> 人</p>
+          </li><li class="hall_cang">
+            <h4>BX001</h4>
+            <i></i>
+            <h5></h5>
+            <p><span>12</span> 人</p>
+          </li><li class="hall_cang">
+            <h4>BX001</h4>
+            <i></i>
+            <h5></h5>
+            <p><span>12</span> 人</p>
+          </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12</span> 人</p>
+            </li>
+            <li class="hall_cang">
+              <h4>BX001</h4>
+              <i></i>
+              <h5></h5>
+              <p><span>12人</span> </p>
+            </li>
+          </ul>
+        </div>
+        <div class="menu">大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅大厅</div>
+        <div class="menu">包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢包厢</div>
+      </div>
+    </div>
+  </section>
+  <!--content结束-->
+<footer class="footer_index">
+  <ul>
+    <li><a href="javascript:;"><i class="active"></i><span class="active">餐台</span></a></li>
+    <li><a href="#pagetwo"><i class="clear"></i><span class="clear">估清</span></a></li>
+    <li><a href="#pagethree"><i class="buymoney"></i><span class="buymoney">收银</span></a></li>
+    <li><a href="##"><i class="quit"></i><span class="quit">退出</span></a></li>
+  </ul>
+</footer>
+
+</div> 
+
+<div data-role="page" id="pagetwo">
+  <div data-role="header">
+    <h1>222</h1>
+  </div>
+  <footer class="footer_index">
+  <ul>
+    <li ><a href="#pageone"><i class="active"></i><span class="active">餐台</span></a></li>
+    <li><a href="javascript:;"><i class="clear"></i><span class="clear">估清</span></a></li>
+    <li><a href="#pagethree"><i class="buymoney"></i><span class="buymoney">收银</span></a></li>
+    <li><a href="##"><i class="quit"></i><span class="quit">退出</span></a></li>
+  </ul>
+</footer>
+  </div>
+
+
+<div data-role="page" id="pagethree">
+  <div data-role="header">
+    <h1>333</h1>
+  </div>
+  <footer class="footer_index">
+    <ul>
+      <li ><a href="#pageone"><i class="active"></i><span class="active">餐台</span></a></li>
+      <li><a href="#pagetwo"><i class="clear"></i><span class="clear">估清</span></a></li>
+      <li><a href="javascript:;"><i class="buymoney"></i><span class="buymoney">收银</span></a></li>
+      <li><a href="##"><i class="quit"></i><span class="quit">退出</span></a></li>
+    </ul>
+  </footer>
+  <script src="js/index.js"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,84 @@
+html *{margin: 0;padding: 0;border: 0;}
+article, aside, details, figcaption, figure, footer, header, hgroup, nav, section, menu, div {
+    display: block;
+}
+h1,h2,h3,h4,h5,h6{ font-weight:normal;}
+ol,ul{ list-style:none;}
+
+a{
+    text-decoration: none;
+    color: #454545
+}
+button,a{
+	outline: none;
+}
+button{
+	cursor: pointer;
+}
+div,button,a,img{
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: transparent; /* For some Androids */
+}
+.clearfix:after {
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+* html .clearfix             { zoom: 1; } /* IE6 */
+*:first-child+html .clearfix { zoom: 1; } /* IE7 */
+ul,li,dl,dd,dt{
+    list-style:none;
+}
+
+
+/*font-face*/
+@font-face {
+    font-family: 'icomoon';
+    src:url('font/icomoon/fonts/icomoon.eot?t=1469414445842');
+    src:url('font/icomoon/fonts/icomoon.eot?#iefix&t=1469414445842') format('embedded-opentype'),
+    url('font/icomoon/fonts/icomoon.woff?t=1469414445842') format('woff'),
+    url('font/icomoon/fonts/icomoon.ttf?t=1469414445842') format('truetype'),
+    url('font/icomoon/fonts/icomoon.svg?#icomoon&t=1469414445842') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+    font-family: 'icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+@font-face {
+    font-family: 'icocate';
+    src:url('font/icocate/fonts/icocate.eot');
+    src:url('font/icocate/fonts/icocate.eot?#iefix') format('embedded-opentype'),
+    url('font/icocate/fonts/icocate.woff') format('woff'),
+    url('font/icocate/fonts/icocate.ttf') format('truetype'),
+    url('font/icocate/fonts/icocate.svg?#icocate') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+[class^="icocate-"], [class*="icocate-"] {
+    font-family: 'icocate';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+
+    /* Better Font Rendering =========== */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
